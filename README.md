@@ -1,6 +1,7 @@
 # darts-open
 
 Darts games to allow custom/complicated games to be played on non electronic dartboards. Heavily under development.
+![](./src/assets/dartboard.svg)
 
 ## Project setup
 ```
