@@ -176,3 +176,25 @@
   </g>
 </svg>
 </template>
+
+<script>
+export default {
+  name: 'dartboard',
+  mounted() {
+    document.querySelector('#Board').addEventListener('click', e => {
+      const validTargets = [
+        'sbull','dbull',
+        'd20','d19','d18','d17','d16','d15','d14','d13','d12','d11','d10','d9','d8','d7','d6','d5','d4','d3','d2','d1',
+        'i20','i19','i18','i17','i16','i15','i14','i13','i12','i11','i10','i9','i8','i7','i6','i5','i4','i3','i2','i1',
+        'o20','o19','o18','o17','o16','o15','o14','o13','o12','o11','o10','o9','o8','o7','o6','o5','o4','o3','o2','o1',
+        't20','t19','t18','t17','t16','t15','t14','t13','t12','t11','t10','t9','t8','t7','t6','t5','t4','t3','t2','t1'
+      ];
+      const id = e.target.id
+      const hit = validTargets.includes(id) ? id : 'miss'
+      this.$emit('hit', hit)
+      console.log(hit)
+
+    })
+  },
+}
+</script>
