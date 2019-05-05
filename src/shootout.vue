@@ -1,11 +1,21 @@
 <template>
   <div id="shootout">
-    <input v-model="message" placeholder="">
-    <button @click="handleDartHit">submit</button>
-    <h2>{{ players[turn].name }} turn to throw</h2>
-    <h2 v-for="player in players" v-bind:key="player.name">
-      {{ player.name }} - score: {{ player.score }} - mult: {{ player.multiplier }}
-    </h2>
+    <div class="head">
+      <h2>{{ players[turn].name }}'s turn to throw</h2>
+      <div class="record">
+        <div>{{ record[0] | totext }}</div>
+        <div>{{ record[1] | totext }}</div>
+        <div>{{ record[2] | totext }}</div>
+      </div>
+    </div>
+    <div class="players">
+      <div v-for="(player, index) in players" v-bind:key="player.name" :class="{ active: turn === index, player }">
+        <h3>{{ player.name }}</h3>
+        <span class="score">{{ player.score }}</span>
+        <span class="multiplier">{{ player.multiplier }}x</span>
+      </div>
+    </div>
+    <div v-if="playerchange" class="playerchange" @click="changeplayer">Player change</div>
     <Dartboard v-on:hit="handleDartHit"/>
   </div>
 </template>
@@ -22,14 +32,35 @@ export default {
   props: ['playercount'],
   data: function() {
     return {
-      message: "",
       turn: 0,
       roundLimit: 8,
       players: [],
+      record: [],
+      playerchange: false,
     }
   },
   created() {
     this.init()
+  },
+  filters: {
+    totext(score) {
+      if (score === undefined) {
+        return ''
+      }
+      if (score === null) {
+        return 'miss'
+      }
+      if ('sio'.includes(score[0])) {
+        return 'single ' + score.substr(1)
+      }
+      if (score[0] === 'd') {
+        return 'double ' + score.substr(1)
+      }
+      if (score[0] === 't') {
+        return 'triple ' + score.substr(1)
+      }
+      return score
+    }
   },
   methods: {
     init() {
@@ -53,7 +84,7 @@ export default {
       }
     },
     handleDartHit(hit) {
-      const { score, target } = this.calculateValue(hit || this.message)
+      const { score, target } = this.calculateValue(hit)
       const player = this.players[this.turn]
       if (!player.throws.includes(target)) {
         player.score = player.score + (score * player.multiplier)
@@ -61,11 +92,18 @@ export default {
       }
       
       player.throws.push(target)
+      this.record.push(hit)
 
       if (player.throws.length % 3 == 0) {
-        this.turn = (this.turn + 1) % this.players.length
+        this.playerchange = true
       }
 
+      this.highlight(this.players[this.turn].throws)
+    },
+    changeplayer() {
+      this.playerchange = false
+      this.turn = (this.turn + 1) % this.players.length
+      this.record = []
       this.highlight(this.players[this.turn].throws)
     },
     calculateValue(target) {
@@ -89,12 +127,64 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
+.head {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  place-items: center;
+  border: 5px solid black;
 }
+
+.players {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  color: white;
+}
+.record {
+  justify-self: end;
+  background-color: black;
+}
+
+.record > div {
+  color: white;
+  font-weight: bold;
+  font-size: 1.25rem;
+  border: 2px solid white;
+  padding: 10px 15px;
+  min-width: 150px;
+  min-height: 23px;
+}
+.players > div {
+  padding: 20px 20px;
+}
+h3 {
+  margin: 5px 0;
+}
+.score {
+  margin-right: 20px;
+}
+.player {
+  background-color: #333;
+}
+.player.active:nth-child(1) {
+  background-color: red;
+}
+.player.active:nth-child(2) {
+  background-color: blue;
+}
+.player.active:nth-child(3) {
+  background-color: green;
+}
+.player.active:nth-child(3) {
+  background-color: purple;
+}
+
+.playerchange {
+  background-color: rgb(126, 104, 43);
+  color:white;
+  font-size: 2rem;
+  padding: 30px;
+  cursor: pointer;
+}
+
 </style>
