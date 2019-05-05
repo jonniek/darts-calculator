@@ -1,7 +1,7 @@
 <template>
   <div id="shootout">
     <div class="head">
-      <h2>{{ players[turn].name }}'s turn to throw</h2>
+      <h2>{{ this.currentround }}/{{ this.roundLimit }}</h2>
       <div class="record">
         <div>{{ record[0] | totext }}</div>
         <div>{{ record[1] | totext }}</div>
@@ -16,6 +16,7 @@
       </div>
     </div>
     <div v-if="playerchange" class="playerchange" @click="changeplayer">Player change</div>
+    <div v-if="gameover" class="gameover" @click="init">Game over</div>
     <Dartboard v-on:hit="handleDartHit"/>
   </div>
 </template>
@@ -33,10 +34,12 @@ export default {
   data: function() {
     return {
       turn: 0,
-      roundLimit: 8,
+      roundLimit: 2,
+      currentround: 1,
       players: [],
       record: [],
       playerchange: false,
+      gamover: false,
     }
   },
   created() {
@@ -64,6 +67,10 @@ export default {
   },
   methods: {
     init() {
+      this.gameover = false
+      this.record = []
+      this.currentround = 1
+      this.turn = 0
       const players = []
       for (let i = 0; i < this.playercount; i++) {
         players.push({ name: "player " + (i+1), score: 0, throws: [], multiplier: 1, })
@@ -86,7 +93,7 @@ export default {
     handleDartHit(hit) {
       const { score, target } = this.calculateValue(hit)
       const player = this.players[this.turn]
-      if (!player.throws.includes(target)) {
+      if (target && !player.throws.includes(target)) {
         player.score = player.score + (score * player.multiplier)
         player.multiplier += 1
       }
@@ -95,19 +102,20 @@ export default {
       this.record.push(hit)
 
       if (player.throws.length % 3 == 0) {
-        this.playerchange = true
+        
+        if (this.turn + 1 === this.players.length && this.currentround === this.roundLimit) {
+          this.gameover = true
+          this.playerchange = false
+          return
+        } else {
+          this.playerchange = true
+        }
       }
 
       this.highlight(this.players[this.turn].throws)
     },
-    changeplayer() {
-      this.playerchange = false
-      this.turn = (this.turn + 1) % this.players.length
-      this.record = []
-      this.highlight(this.players[this.turn].throws)
-    },
     calculateValue(target) {
-      if (target === 'miss') {
+      if (target === null) {
         return { score: 0, target: null }
       }
       const multiplierString = target[0]
@@ -121,7 +129,16 @@ export default {
       } else if (multiplierString == "t") {
         return { score: 3 * parseInt(number), target: 'a' + number }
       }
-    }
+    },
+    changeplayer() {
+      if (this.turn + 1 === this.players.length) {
+        this.currentround = this.currentround + 1
+      }
+      this.playerchange = false
+      this.turn = (this.turn + 1) % this.players.length
+      this.record = []
+      this.highlight(this.players[this.turn].throws)
+    },
   }
 }
 </script>
@@ -179,12 +196,15 @@ h3 {
   background-color: purple;
 }
 
-.playerchange {
+.playerchange, .gameover {
   background-color: rgb(126, 104, 43);
   color:white;
   font-size: 2rem;
   padding: 30px;
   cursor: pointer;
+}
+.gameover {
+  background-color: rgb(26, 82, 74);
 }
 
 </style>

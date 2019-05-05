@@ -46,7 +46,7 @@
     </metadata>
     <g id="Board" transform="translate(236.5,236.5)">
       <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="BaseBoard">
-        <path sodipodi:type="arc" style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.10000002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" id="miss" sodipodi:cx="0" sodipodi:cy="0" sodipodi:rx="226.5" sodipodi:ry="226.5" d="M 226.5 0 A 226.5 226.5 0 1 1  -226.5,2.7737334e-14 A 226.5 226.5 0 1 1  226.5 -5.5474668e-14 z"/>
+        <path sodipodi:type="arc" style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.10000002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" sodipodi:cx="0" sodipodi:cy="0" sodipodi:rx="226.5" sodipodi:ry="226.5" d="M 226.5 0 A 226.5 226.5 0 1 1  -226.5,2.7737334e-14 A 226.5 226.5 0 1 1  226.5 -5.5474668e-14 z"/>
       </g>
       <g id="Inside Spider" style="stroke:#3f4252;stroke-width:1.10000002;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
         <g id="double-bright" style="opacity:1;fill:#1b3296;fill-opacity:1;fill-rule:evenodd">
@@ -178,6 +178,7 @@
   </svg>
   <div class="confirm" v-if="hit">
     <div class="number">{{ hit }}</div>
+    <div class="button miss" @click="handleConfirmation(null)">miss</div>
     <div class="button close" @click="hit = null">x</div>
     <div :class="'button option option' + option" v-for="option in options" v-bind:key="option" @click="handleConfirmation(option)">
       {{ option }}
@@ -197,11 +198,8 @@ export default {
   },
   methods: {
     handleConfirmation(x) {
-      console.log("handling", x)
-      let msg = '';
-      if (this.hit === null) {
-        msg = null
-      }else if (x == '1x') {
+      let msg = x;
+      if (x == '1x') {
         msg = 'i' + this.hit
       } else if (x == '2x') {
         msg = 'd' + this.hit
@@ -215,7 +213,7 @@ export default {
   mounted() {
     document.querySelector('#Board').addEventListener('click', e => {
       const validTargets = [
-        'sbull','dbull', 'miss',
+        'sbull','dbull',
         'd20','d19','d18','d17','d16','d15','d14','d13','d12','d11','d10','d9','d8','d7','d6','d5','d4','d3','d2','d1',
         'i20','i19','i18','i17','i16','i15','i14','i13','i12','i11','i10','i9','i8','i7','i6','i5','i4','i3','i2','i1',
         'o20','o19','o18','o17','o16','o15','o14','o13','o12','o11','o10','o9','o8','o7','o6','o5','o4','o3','o2','o1',
@@ -223,12 +221,10 @@ export default {
       ];
       const id = e.target.id
       if (validTargets.includes(id)) {
-        const hit = 'miss' === id ? null : id.substr(1)
+        const hit = id.substr(1)
         const options = hit === 'bull' ? ['1x','2x'] : ['1x', '2x', '3x']
         this.hit = hit
         this.options = options
-        // this.$emit('hit', { hit, options })
-        // console.log(hit)
       }
     })
   },
@@ -280,14 +276,17 @@ export default {
   .number {
     font-weight: bold;
     font-size: 1.5rem;
-    grid-column-start: 1;
-    grid-column-end: 3;
+  }
+  .miss {
+    background-color: rgb(65, 44, 63);
+    padding: 20px 30px;
+    color: white;
   }
   .close {
     justify-self: end;
     font-weight: bold;
     background-color: black;
-    padding: 20px 44.5px;
+    padding: 20px 45.5px;
     color: white;
     grid-row: 1;
     grid-column: 3;
