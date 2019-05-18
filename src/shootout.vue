@@ -17,7 +17,7 @@
     </div>
     <div v-if="playerchange" class="playerchange" @click="changeplayer">Player change</div>
     <div v-if="gameover" class="gameover" @click="init">Game over</div>
-    <Dartboard v-on:hit="handleDartHit"/>
+    <Dartboard v-on:hit="handleDartHit" :disabled="playerchange || gameover"/>
   </div>
 </template>
 
@@ -34,7 +34,7 @@ export default {
   data: function() {
     return {
       turn: 0,
-      roundLimit: 2,
+      roundLimit: 8,
       currentround: 1,
       players: [],
       record: [],
@@ -144,7 +144,7 @@ export default {
 </script>
 
 <style>
-
+#shootout { display: relative }
 .head {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -153,8 +153,7 @@ export default {
 }
 
 .players {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
   color: white;
 }
 .record {
@@ -165,17 +164,21 @@ export default {
 .record > div {
   color: white;
   font-weight: bold;
-  font-size: 1.25rem;
+  font-size: 1rem;
   border: 2px solid white;
-  padding: 10px 15px;
+  padding: 10px;
   min-width: 150px;
-  min-height: 23px;
+  min-height: 45px;
 }
 .players > div {
-  padding: 20px 20px;
+  padding: 10px;
+  border-left: 4px solid black;
+  border-bottom: 4px solid black;
+}.players > div:last-child {
+  border-right: 4px solid black;
 }
 h3 {
-  margin: 5px 0;
+  margin: 0 0 5px 0;
 }
 .score {
   margin-right: 20px;
@@ -197,7 +200,13 @@ h3 {
 }
 
 .playerchange, .gameover {
-  background-color: rgb(126, 104, 43);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  font-weight: bold;
+  transform: translate(-50%, -50%);
+  background-color: rgb(189, 201, 87);
   color:white;
   font-size: 2rem;
   padding: 30px;

@@ -1,4 +1,4 @@
-<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://web.resource.org/cc/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="637" height="473" id="svg2" sodipodi:version="0.32" inkscape:version="0.43" sodipodi:docbase="/home/tijmen-gentoo/Images/Graphics Tijmen/SVG" sodipodi:docname="Dartboard.svg" version="1.0">
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://web.resource.org/cc/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="473" height="473" id="svg2" sodipodi:version="0.32" inkscape:version="0.43" sodipodi:docbase="/home/tijmen-gentoo/Images/Graphics Tijmen/SVG" sodipodi:docname="Dartboard.svg" version="1.0">
   <defs id="defs4">
     <marker inkscape:stockid="Arrow2Send" orient="auto" refY="0" refX="0" id="Arrow2Send" style="overflow:visible">
       <path id="path9898" style="font-size:12px;fill:#62adff;fill-opacity:1;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round" d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.97309,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z " transform="matrix(-0.3,0,0,-0.3,1.5,0)"/>
@@ -44,7 +44,7 @@
   </metadata>
   <g id="Board" transform="translate(236.5,236.5)">
     <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="BaseBoard">
-      <path sodipodi:type="arc" style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.10000002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" id="path1307" sodipodi:cx="0" sodipodi:cy="0" sodipodi:rx="226.5" sodipodi:ry="226.5" d="M 226.5 0 A 226.5 226.5 0 1 1  -226.5,2.7737334e-14 A 226.5 226.5 0 1 1  226.5 -5.5474668e-14 z"/>
+      <path sodipodi:type="arc" style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.10000002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" sodipodi:cx="0" sodipodi:cy="0" sodipodi:rx="226.5" sodipodi:ry="226.5" d="M 226.5 0 A 226.5 226.5 0 1 1  -226.5,2.7737334e-14 A 226.5 226.5 0 1 1  226.5 -5.5474668e-14 z"/>
     </g>
     <g id="Inside Spider" style="stroke:#3f4252;stroke-width:1.10000002;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
       <g id="double-bright" style="opacity:1;fill:#1b3296;fill-opacity:1;fill-rule:evenodd">

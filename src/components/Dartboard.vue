@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-  <svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://web.resource.org/cc/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="473" height="473" id="svg2" sodipodi:version="0.32" inkscape:version="0.43" sodipodi:docbase="/home/tijmen-gentoo/Images/Graphics Tijmen/SVG" sodipodi:docname="Dartboard.svg" version="1.0">
+  <svg viewBox="0 0 470 470" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://web.resource.org/cc/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" id="svg2" sodipodi:version="0.32" inkscape:version="0.43" sodipodi:docbase="/home/tijmen-gentoo/Images/Graphics Tijmen/SVG" sodipodi:docname="Dartboard.svg" version="1.0">
     <defs id="defs4">
       <marker inkscape:stockid="Arrow2Send" orient="auto" refY="0" refX="0" id="Arrow2Send" style="overflow:visible">
         <path id="path9898" style="font-size:12px;fill:#62adff;fill-opacity:1;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round" d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.97309,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z " transform="matrix(-0.3,0,0,-0.3,1.5,0)"/>
@@ -176,7 +176,7 @@
       </g>
     </g>
   </svg>
-  <div class="confirm" v-if="hit">
+  <div class="confirm" v-if="hit && !disabled">
     <div class="number">{{ hit }}</div>
     <div class="button miss" @click="handleConfirmation(null)">miss</div>
     <div class="button close" @click="hit = null">x</div>
@@ -190,6 +190,7 @@
 <script>
 export default {
   name: 'dartboard',
+  props: ['disabled'],
   data: function() {
     return {
       hit: "",
@@ -212,6 +213,9 @@ export default {
   },
   mounted() {
     document.querySelector('#Board').addEventListener('click', e => {
+      if (this.disabled) {
+        return
+      }
       const validTargets = [
         'sbull','dbull',
         'd20','d19','d18','d17','d16','d15','d14','d13','d12','d11','d10','d9','d8','d7','d6','d5','d4','d3','d2','d1',
@@ -238,20 +242,23 @@ export default {
     grid-template-rows: 1fr;
     place-items: center center;
   }
-  svg {
-    max-width: 100%;
-  }
   .confirm, svg {
     grid-column: 1;
     grid-row: 1;
   }
   .confirm {
-    background-color: white;
+    background-color: black;
+    color: white;
+    font-weight: bold;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 50% 50%;
-    place-items: center center;
+    grid-template-rows: 70px 70px;
     border: 4px solid black;
+  }
+  .confirm > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .button {
     cursor: pointer;
@@ -274,21 +281,14 @@ export default {
     grid-template-rows: 2;
   }
   .number {
-    font-weight: bold;
+    color: black;
+    background-color: white;
     font-size: 1.5rem;
   }
   .miss {
     background-color: rgb(65, 44, 63);
-    padding: 20px 30px;
-    color: white;
   }
   .close {
-    justify-self: end;
-    font-weight: bold;
     background-color: black;
-    padding: 20px 45.5px;
-    color: white;
-    grid-row: 1;
-    grid-column: 3;
   }
 </style>
