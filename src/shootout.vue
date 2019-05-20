@@ -16,7 +16,10 @@
       </div>
     </div>
     <div v-if="playerchange" class="playerchange" @click="changeplayer">Player change</div>
-    <div v-if="gameover" class="gameover" @click="init">Game over</div>
+    <div v-if="gameover" class="gameover">
+      <div class="mainmenu" @click="goToMenu">Main menu</div>
+      <div class="playagain" @click="init">Play again</div>
+    </div>
     <Dartboard v-on:hit="handleDartHit" :disabled="playerchange || gameover"/>
   </div>
 </template>
@@ -30,7 +33,7 @@ export default {
   components: {
     Dartboard
   },
-  props: ['playercount'],
+  props: ['playernames'],
   data: function() {
     return {
       turn: 0,
@@ -71,11 +74,12 @@ export default {
       this.record = []
       this.currentround = 1
       this.turn = 0
-      const players = []
-      for (let i = 0; i < this.playercount; i++) {
-        players.push({ name: "player " + (i+1), score: 0, throws: [], multiplier: 1, })
-      }
-      this.players = players
+      this.players = this.playernames.map(name => ({
+        name,
+        score: 0,
+        throws: [],
+        multiplier: 1
+      }))
       setTimeout(() => {
         this.highlight(this.players[this.turn].throws)
       }, 10)
@@ -106,6 +110,8 @@ export default {
         if (this.turn + 1 === this.players.length && this.currentround === this.roundLimit) {
           this.gameover = true
           this.playerchange = false
+          const winner = this.players.sort((a, b) => a.score > b.score)[0]
+          this.$emit('saveScore', { name: winner.name, mode: 'shootout', score: winner.score })
           return
         } else {
           this.playerchange = true
@@ -139,6 +145,9 @@ export default {
       this.record = []
       this.highlight(this.players[this.turn].throws)
     },
+    goToMenu() {
+      this.$emit('gameover')
+    }
   }
 }
 </script>
@@ -181,10 +190,11 @@ h3 {
   margin: 0 0 5px 0;
 }
 .score {
-  margin-right: 20px;
+  margin-right: 10px;
 }
 .player {
   background-color: #333;
+  flex-grow: 1;
 }
 .player.active:nth-child(1) {
   background-color: red;
@@ -195,8 +205,11 @@ h3 {
 .player.active:nth-child(3) {
   background-color: green;
 }
-.player.active:nth-child(3) {
+.player.active:nth-child(4) {
   background-color: purple;
+}
+.player.active:nth-child(5) {
+  background-color: rgb(28, 114, 110);
 }
 
 .playerchange, .gameover {
@@ -212,8 +225,10 @@ h3 {
   padding: 30px;
   cursor: pointer;
 }
-.gameover {
-  background-color: rgb(26, 82, 74);
+.gameover { padding: 0}
+.gameover > div {padding: 30px}
+.playagain {
+  background-color: rgb(45, 102, 19);
 }
 
 </style>
