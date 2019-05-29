@@ -3,7 +3,9 @@
     <div v-if="game == 0" class="menu">
       <h2>Select game mode</h2>
       <div class="gamemode shootout" @click="game = 1">Shoot out</div>
-      <div class="gamemode zero1" @click="game = 2">01</div>
+      <div class="gamemode zero1" @click="game = 2; zero1score = 301">301</div>
+      <div class="gamemode zero12" @click="game = 2; zero1score = 501">501</div>
+      <div class="gamemode zero13" @click="game = 2; zero1score = 701">701</div>
 
       <div class="highscore" v-if="shootoutScores.length > 0">
         <h3>Shootout highscores</h3>
@@ -33,7 +35,7 @@
     </div>
     <div v-else>
       <shootout v-if="game == 1" v-bind:playernames="players" v-on:saveScore="handleAddScore" v-on:gameover="reset"/>
-      <zero1 v-if="game == 2"  v-bind:playernames="players" />
+      <zero1 v-if="game == 2"  v-bind:playernames="players" :initialScore="zero1score" v-on:gameover="reset"/>
     </div>
   </div>
 </template>
@@ -55,6 +57,7 @@ export default {
       players: [],
       gamestarted: false,
       highscores: [],
+      zero1score: 301,
     }
   },
   created() {
@@ -64,7 +67,6 @@ export default {
   },
   computed: {
     shootoutScores: function() {
-      console.log(this.highscores)
       return this.highscores.filter(s => s.mode === 'shootout').sort((a, b) => a.score < b.score)
     }
   },
@@ -103,7 +105,13 @@ export default {
   background-color: rgb(145, 26, 26)
 }
 .zero1 {
-  background-color: rgb(23, 110, 74)
+  background-color: rgb(54, 123, 128)
+}
+.zero12 {
+  background-color: rgb(125, 24, 134)
+}
+.zero13 {
+  background-color: rgb(79, 155, 35)
 }
 .playercount > div:nth-child(1) {
   background-color: red;
