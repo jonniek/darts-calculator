@@ -1,6 +1,6 @@
 # darts-open
 
-Keep track of darts score while playing on a traditional board.
+Keep track of darts score while playing on a traditional board.  
 ![](darts-app.png)
 
 Try it: [https://jonniek.github.io/darts/](https://jonniek.github.io/darts/)
