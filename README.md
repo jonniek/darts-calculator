@@ -1,7 +1,18 @@
 # darts-open
 
-Darts games to allow custom/complicated games to be played on non electronic dartboards. Heavily under development.
-![](./src/assets/dartboard.svg)
+Keep track of darts score while playing on a traditional board.
+![](darts-app.png)
+
+Try it: [https://jonniek.github.io/darts/](https://jonniek.github.io/darts/)
+
+Current game modes:
+- 301, 501, 701
+- shootout
+
+Features:
+- Up to 5 players
+- Highscores for shootout in localStorage
+- Possible to change colors of any targets(ex. 01 uses green for winning throw)
 
 ## Project setup
 ```
