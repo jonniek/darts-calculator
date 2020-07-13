@@ -25,7 +25,6 @@
 
 <script>
 import Dartboard from './components/Dartboard.vue'
-import { setTimeout } from 'timers';
 
 export default {
   name: 'zero1',
