@@ -3,7 +3,7 @@
     <div class="head">
       <h2>{{ this.currentround }}/{{ this.roundLimit }}</h2>
       <div class="record">
-        <div>{{ record[0] | totext }}</div>
+        <div @click="undo">{{ record[0] | totext }}</div>
         <div>{{ record[1] | totext }}</div>
         <div>{{ record[2] | totext }}</div>
       </div>
@@ -153,6 +153,16 @@ export default {
       this.playerchange = false
       this.turn = (this.turn + 1) % this.players.length
       this.record = []
+      this.highlight(this.players[this.turn].score)
+    },
+    undo() {
+      const player = this.players[this.turn]
+      const recordCount = this.record.length
+      const scoreToUndo = this.record.reduce((sum, next) => sum + this.calculateValue(next).score, 0)
+      player.throws = player.throws.slice(0, recordCount * -1)
+      player.score += scoreToUndo
+      this.record = []
+      this.playerchange = false
       this.highlight(this.players[this.turn].score)
     },
     goToMenu() {

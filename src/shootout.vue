@@ -110,8 +110,9 @@ export default {
         if (this.turn + 1 === this.players.length && this.currentround === this.roundLimit) {
           this.gameover = true
           this.playerchange = false
-          const winner = this.players.sort((a, b) => a.score > b.score)[0]
-          this.$emit('saveScore', { name: winner.name, mode: 'shootout', score: winner.score })
+          this.players.forEach(player => {
+            this.$emit('saveScore', { name: player.name, mode: 'shootout', score: player.score })
+          })
           return
         } else {
           this.playerchange = true

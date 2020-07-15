@@ -62,20 +62,20 @@ export default {
   },
   created() {
     if (localStorage) {
-      this.highscores = localStorage.getItem('highscore') || []
+      this.highscores = JSON.parse(localStorage.getItem('highscore') || '[]')
     }
   },
   computed: {
     shootoutScores: function() {
-      return this.highscores.filter(s => s.mode === 'shootout').sort((a, b) => a.score < b.score)
-    }
+      return this.highscores.filter(s => s.mode === 'shootout').sort((a, b) => a.score < b.score).slice(0, 5)
+    },
   },
   methods: {
     handleAddScore(score) {
       this.highscores.push(score)
       if (localStorage) {
-        const scores = localStorage.getItem('highscore') || []
-        localStorage.setItem('highscore', [...scores, score])
+        const scores = JSON.parse(localStorage.getItem('highscore') || '[]')
+        localStorage.setItem('highscore', JSON.stringify([...scores, score]))
       }
     },
     reset() {
