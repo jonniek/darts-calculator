@@ -114,7 +114,13 @@ export default {
         player.score = player.score - score
         this.record.push(hit)
       } else {
+        this.record.forEach(rec => {
+          player.score += this.calculateValue(rec).score
+        })
+
         this.record.push('bust')
+        this.playerchange = true
+        return
       }
 
       if (player.throws.length % 3 == 0) {

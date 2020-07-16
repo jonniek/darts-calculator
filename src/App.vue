@@ -3,6 +3,7 @@
     <div v-if="game == 0" class="menu">
       <h2>Select game mode</h2>
       <div class="gamemode shootout" @click="game = 1">Shoot out</div>
+      <div class="gamemode cricket" @click="game = 3">Cricket</div>
       <div class="gamemode zero1" @click="game = 2; zero1score = 301">301</div>
       <div class="gamemode zero12" @click="game = 2; zero1score = 501">501</div>
       <div class="gamemode zero13" @click="game = 2; zero1score = 701">701</div>
@@ -36,6 +37,7 @@
     <div v-else>
       <shootout v-if="game == 1" v-bind:playernames="players" v-on:saveScore="handleAddScore" v-on:gameover="reset"/>
       <zero1 v-if="game == 2"  v-bind:playernames="players" :initialScore="zero1score" v-on:gameover="reset"/>
+      <cricket v-if="game == 3"  v-bind:playernames="players" v-on:gameover="reset" :targets="['15', '16', '17', '18', '19', '20', 'bull']" />
     </div>
   </div>
 </template>
@@ -43,6 +45,7 @@
 <script>
 import shootout from './shootout.vue'
 import zero1 from './zero1.vue'
+import cricket from './cricket.vue';
 import './assets/global.css'
 
 export default {
@@ -50,6 +53,7 @@ export default {
   components: {
     shootout,
     zero1,
+    cricket,
   },
   data: function() {
     return {
@@ -102,31 +106,34 @@ export default {
   cursor: pointer;
 }
 .shootout {
-  background-color: rgb(145, 26, 26)
+  background-color: #EAC435
+}
+.cricket {
+  background-color: #345995
 }
 .zero1 {
-  background-color: rgb(54, 123, 128)
+  background-color: #E40066
 }
 .zero12 {
-  background-color: rgb(125, 24, 134)
+  background-color: #03CEA4
 }
 .zero13 {
-  background-color: rgb(79, 155, 35)
+  background-color: #FB4D3D
 }
 .playercount > div:nth-child(1) {
-  background-color: red;
+  background-color: #FB4D3D
 }
 .playercount > div:nth-child(2) {
-  background-color: blue;
+  background-color: #03CEA4
 }
 .playercount > div:nth-child(3) {
-  background-color: green;
+  background-color: #E40066
 }
 .playercount > div:nth-child(4) {
-  background-color: purple;
+  background-color: #345995
 }
 .playercount > div:nth-child(5) {
-  background-color: rgb(28, 114, 110);
+  background-color: #EAC435
 }
 .highscore {
   padding: 30px;
@@ -160,7 +167,7 @@ export default {
   max-width: 300px;
 }
 .startgame {
-  background-color: #222
+  background-color: #345995
 }
 
 

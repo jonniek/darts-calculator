@@ -43,6 +43,7 @@ export default {
       record: [],
       playerchange: false,
       gamover: false,
+      undoState: {}
     }
   },
   created() {

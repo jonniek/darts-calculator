@@ -1,6 +1,6 @@
-# darts-open
+# darts-caclulator
 
-Keep track of darts score while playing on a traditional board.  
+Keep track and calculate darts scores while playing on a traditional board.  
 ![](darts-app.png)
 
 Try it: [https://darts-calculator.netlify.app/](darts-calculator.netlify.app)
@@ -8,6 +8,7 @@ Try it: [https://darts-calculator.netlify.app/](darts-calculator.netlify.app)
 Current game modes:
 - 301, 501, 701
 - shootout
+- cricket
 
 Features:
 - Up to 5 players
