@@ -68,6 +68,22 @@ export default {
     if (localStorage) {
       this.highscores = JSON.parse(localStorage.getItem('highscore') || '[]')
     }
+    const search = new URLSearchParams(document.location.search)
+    const quickgame = search.get("quickgame");
+    if (quickgame) {
+      this.players = ["player 1", "player 2"]
+      if (quickgame.endsWith("01")) {
+        this.game = 2
+        this.zero1score = Number(quickgame)
+        this.gamestarted = true
+      } else if (quickgame === "cricket") {
+        this.game = 3
+        this.gamestarted = true
+      } else if (quickgame === "shootout") {
+        this.game = 1
+        this.gamestarted = true
+      }
+    }
   },
   computed: {
     shootoutScores: function() {
