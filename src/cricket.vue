@@ -6,7 +6,7 @@
         <thead>
           <tr>
             <td></td>
-            <td v-for="player in players" v-bind:key="player.name">
+            <td v-for="(player, index) in players" v-bind:key="player.name" :class="{ active: turn === index, player }">
               {{ player.name }}
             </td>
           </tr>
@@ -224,7 +224,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #shootout { display: relative }
 .head {
   display: grid;
@@ -287,24 +287,8 @@ h3 {
 .score {
   margin-right: 10px;
 }
-.player {
-  background-color: #333;
-  flex-grow: 1;
-}
-.player.active:nth-child(1) {
-  background-color: red;
-}
-.player.active:nth-child(2) {
-  background-color: blue;
-}
-.player.active:nth-child(3) {
-  background-color: green;
-}
-.player.active:nth-child(4) {
-  background-color: purple;
-}
-.player.active:nth-child(5) {
-  background-color: rgb(28, 114, 110);
+.player.active {
+  font-weight: bold;
 }
 
 .playerchange, .gameover {

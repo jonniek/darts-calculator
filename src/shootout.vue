@@ -154,7 +154,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #shootout { display: relative }
 .head {
   display: grid;
