@@ -2,12 +2,19 @@
   --primary-text-color: #333;
   --primary-background-color: #fefefe;
 }
-
 @media (prefers-color-scheme:dark) {
   :root {
     --primary-text-color: #ece8de;
     --primary-background-color: #1c2024;
   }
+}
+[data-theme="light"] {
+  --primary-text-color: #333;
+  --primary-background-color: #fefefe;
+}
+[data-theme="dark"] {
+  --primary-text-color: #ece8de;
+  --primary-background-color: #1c2024;
 }
 
 body {
