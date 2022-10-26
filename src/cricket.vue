@@ -230,7 +230,7 @@ export default {
   display: grid;
   grid-template-columns: 2fr 1fr;
   place-items: center;
-  border: 5px solid black;
+  border-bottom: 4px solid black;
 }
 
 .crickettable {
@@ -276,10 +276,7 @@ export default {
 }
 .players > div {
   padding: 10px;
-  border-left: 4px solid black;
   border-bottom: 4px solid black;
-}.players > div:last-child {
-  border-right: 4px solid black;
 }
 h3 {
   margin: 0 0 5px 0;

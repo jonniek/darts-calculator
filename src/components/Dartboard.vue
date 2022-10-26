@@ -241,6 +241,7 @@ export default {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     place-items: center center;
+    border-top: none;
   }
   .confirm, svg {
     grid-column: 1;
