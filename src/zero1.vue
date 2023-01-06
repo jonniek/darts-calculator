@@ -118,6 +118,10 @@ export default {
           player.score += this.calculateValue(rec).score
         })
 
+        while (player.throws.length % 3 != 0) {
+          player.throws.push(null)
+        }
+
         this.record.push('bust')
         this.playerchange = true
         return
