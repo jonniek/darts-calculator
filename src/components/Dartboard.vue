@@ -146,10 +146,10 @@
           <path id="i18" class="s18 a18" transform="matrix(0.707107,-0.707106,-0.707106,-0.707107,0,0)" sodipodi:end="0.31415927" sodipodi:start="0" d="M 98.449997,0 A 98.449997,98.449997 0 0 1 93.631511,30.422723 L 0,0 z" sodipodi:ry="98.449997" sodipodi:rx="98.449997" sodipodi:cy="0" sodipodi:cx="0" sodipodi:type="arc"></path>
         </g>
         <g style="opacity:1;fill:#1b3296;fill-opacity:1;fill-rule:evenodd">
-          <path id="sbull" class="bull" sodipodi:type="arc" sodipodi:cx="0" sodipodi:cy="0" sodipodi:rx="16.450001" sodipodi:ry="16.450001" d="M 16.450001 0 A 16.450001 16.450001 0 1 1  -16.450001,2.0144775e-15 A 16.450001 16.450001 0 1 1  16.450001 -4.0289551e-15 z" />
+          <path id="sbull" class="bull sbull" sodipodi:type="arc" sodipodi:cx="0" sodipodi:cy="0" sodipodi:rx="16.450001" sodipodi:ry="16.450001" d="M 16.450001 0 A 16.450001 16.450001 0 1 1  -16.450001,2.0144775e-15 A 16.450001 16.450001 0 1 1  16.450001 -4.0289551e-15 z" />
         </g>
         <g style="opacity:1;fill:#ff0000;fill-opacity:1;fill-rule:evenodd">
-          <path id="dbull" class="bull" d="M 6.9000001 0 A 6.9000001 6.9000001 0 1 1  -6.9000001,8.449784e-16 A 6.9000001 6.9000001 0 1 1  6.9000001 -1.6899568e-15 z" sodipodi:ry="6.9000001" sodipodi:rx="6.9000001" sodipodi:cy="0" sodipodi:cx="0" sodipodi:type="arc" />
+          <path id="dbull" class="bull dbull" d="M 6.9000001 0 A 6.9000001 6.9000001 0 1 1  -6.9000001,8.449784e-16 A 6.9000001 6.9000001 0 1 1  6.9000001 -1.6899568e-15 z" sodipodi:ry="6.9000001" sodipodi:rx="6.9000001" sodipodi:cy="0" sodipodi:cx="0" sodipodi:type="arc" />
         </g>
       </g>
       <g id="BoardNumbers" style="font-size:28px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;font-family:Sans">

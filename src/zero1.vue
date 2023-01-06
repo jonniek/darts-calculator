@@ -85,7 +85,9 @@ export default {
       const range = [...Array(20).keys()].map(i => i+1)
       let validTargets;
       if (target == 50) {
-        validTargets = document.querySelectorAll(".bull")
+        validTargets = document.querySelectorAll(".dbull")
+      } else if (target == 25) {
+        validTargets = document.querySelectorAll(".sbull")
       } else {
         const validSingles = range.filter(i => i == target).map(s => ".s"+s)
         const validDoubles = range.filter(i => i*2 == target).map(s => "#d"+s)
@@ -142,14 +144,13 @@ export default {
       }
       const multiplierString = target[0]
       const number = target.substr(1)
-      if (number == "bull") {
-        return { score: 50, target: 'bull' }
-      } else if (multiplierString == "o" || multiplierString == "i") {
-        return { score: parseInt(number), target: 'a' + number }
+      const score = (number == "bull") ? 25 : parseInt(number)
+      if (multiplierString == "o" || multiplierString == "i") {
+        return { score: score, target: 'a' + number }
       } else if (multiplierString == "d") {
-        return { score: 2 * parseInt(number), target: 'a' + number }
+        return { score: 2 * score, target: 'a' + number }
       } else if (multiplierString == "t") {
-        return { score: 3 * parseInt(number), target: 'a' + number }
+        return { score: 3 * score, target: 'a' + number }
       }
     },
     changeplayer() {
