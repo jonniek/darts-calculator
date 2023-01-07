@@ -100,7 +100,7 @@ export default {
     },
     reset() {
       this.game = 0
-      this.players = 0
+      this.players = []
       this.gamestarted = false
     },
     setPlayers(count) {
