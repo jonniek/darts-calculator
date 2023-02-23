@@ -27,6 +27,13 @@
         <div @click="setPlayers(5)">5</div>
       </div>
     </div>
+    <div v-else-if="(game == 2 || game == 1) && bullrule == null">
+      <h2>Select bulls eye rules</h2>
+      <div class="playercount">
+        <div @click="setBullruleCombined()">Single and double bull are combined (50)</div>
+        <div @click="setBullruleSeparate()">Single and double bull are separate (25 and 50)</div>
+      </div>
+    </div>
     <div v-else-if="!gamestarted">
       <h2>Edit player names</h2>
       <div class="playernames">
@@ -35,8 +42,8 @@
       <div class="startgame" @click="gamestarted = true">Start game</div>
     </div>
     <div v-else>
-      <shootout v-if="game == 1" v-bind:playernames="players" v-on:saveScore="handleAddScore" v-on:gameover="reset"/>
-      <zero1 v-if="game == 2"  v-bind:playernames="players" :initialScore="zero1score" v-on:gameover="reset"/>
+      <shootout v-if="game == 1" v-bind:playernames="players" v-on:saveScore="handleAddScore" v-on:gameover="reset" :bullrule="bullrule"/>
+      <zero1 v-if="game == 2"  v-bind:playernames="players" :initialScore="zero1score" v-on:gameover="reset" :bullrule="bullrule" />
       <cricket v-if="game == 3"  v-bind:playernames="players" v-on:gameover="reset" :targets="['15', '16', '17', '18', '19', '20', 'bull']" />
     </div>
   </div>
@@ -62,6 +69,7 @@ export default {
       gamestarted: false,
       highscores: [],
       zero1score: 301,
+      bullrule: null,
     }
   },
   created() {
@@ -102,6 +110,7 @@ export default {
       this.game = 0
       this.players = []
       this.gamestarted = false
+      this.bullrule = null
     },
     setPlayers(count) {
       const players = []
@@ -109,6 +118,12 @@ export default {
         players.push("player " + (i+1))
       }
       this.players = players
+    },
+    setBullruleCombined() {
+      this.bullrule = "combined"
+    },
+    setBullruleSeparate() {
+      this.bullrule = "separate"
     }
   }
 }

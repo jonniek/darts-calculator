@@ -33,7 +33,7 @@ export default {
   components: {
     Dartboard
   },
-  props: ['playernames'],
+  props: ['playernames', 'bullrule'],
   data: function() {
     return {
       turn: 0,
@@ -129,7 +129,16 @@ export default {
       const multiplierString = target[0]
       const number = target.substr(1)
       if (number == "bull") {
-        return { score: 50, target: 'bull' }
+        if (this.bullrule == "combined") {
+          return { score: 50, target: 'bull' }
+        } else {
+          const mult = target[0]
+          if (mult == "d") {
+            return { score: 50, target: 'bull' }
+          } else {
+            return { score: 25, target: 'bull' }
+          }
+        }
       } else if (multiplierString == "o" || multiplierString == "i") {
         return { score: parseInt(number), target: 'a' + number }
       } else if (multiplierString == "d") {

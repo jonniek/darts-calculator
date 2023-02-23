@@ -89,7 +89,7 @@ export default {
     init() {
 
       const targets = this.targets.reduce((all, next) => ({...all, [next]: 0 }), {})
-
+      console.log(this.playernames)
       this.gameover = false
       this.playerchange = false
       this.record = []

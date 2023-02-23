@@ -31,7 +31,7 @@ export default {
   components: {
     Dartboard
   },
-  props: ['playernames', 'initialScore'],
+  props: ['playernames', 'initialScore', 'bullrule'],
   data: function() {
     return {
       turn: 0,
@@ -84,8 +84,15 @@ export default {
         .forEach(item => item.style.fill = "inherit")
       const range = [...Array(20).keys()].map(i => i+1)
       let validTargets;
+      console.log(target, this.bullrule)
       if (target == 50) {
-        validTargets = document.querySelectorAll(".bull")
+        if (this.bullrule == "combined") {
+          validTargets = document.querySelectorAll(".bull")
+        } else {
+          validTargets = document.querySelectorAll("#dbull")
+        }
+      } else if (target == 25 && this.bullrule == "separate") {
+        validTargets = document.querySelectorAll("#sbull")
       } else {
         const validSingles = range.filter(i => i == target).map(s => ".s"+s)
         const validDoubles = range.filter(i => i*2 == target).map(s => "#d"+s)
@@ -147,7 +154,16 @@ export default {
       const multiplierString = target[0]
       const number = target.substr(1)
       if (number == "bull") {
-        return { score: 50, target: 'bull' }
+        if (this.bullrule == "combined") {
+          return { score: 50, target: 'bull' }
+        } else {
+          const mult = target[0]
+          if (mult == "d") {
+            return { score: 50, target: 'bull' }
+          } else {
+            return { score: 25, target: 'bull' }
+          }
+        }
       } else if (multiplierString == "o" || multiplierString == "i") {
         return { score: parseInt(number), target: 'a' + number }
       } else if (multiplierString == "d") {
